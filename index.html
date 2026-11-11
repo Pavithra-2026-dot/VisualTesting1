@@ -1,0 +1,704 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qyrus Visual Testing - Overlap Demo</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f2f4f8;
+    color: #202638;
+}
+
+/* ================= HEADER ================= */
+
+header {
+    position: relative;
+    background: #10172d;
+    color: white;
+    padding: 20px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.cart {
+    background: #28385f;
+    padding: 10px 16px;
+    border-radius: 8px;
+}
+
+/* ================= COMMON ================= */
+
+.container {
+    max-width: 1200px;
+    margin: 25px auto;
+    padding: 0 20px;
+}
+
+.page-heading {
+    margin-bottom: 20px;
+}
+
+.page-heading h1 {
+    font-size: 25px;
+    margin-bottom: 7px;
+}
+
+.page-heading p {
+    color: #737d91;
+    font-size: 14px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 25px;
+}
+
+.card {
+    position: relative;
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    margin-bottom: 22px;
+    box-shadow: 0 3px 14px rgba(20, 30, 55, 0.08);
+}
+
+h2, h3 {
+    margin-top: 0;
+}
+
+p {
+    line-height: 1.6;
+}
+
+/* ================= PRODUCT IMAGE ================= */
+
+.product-image {
+    height: 360px;
+    border-radius: 10px;
+    background: linear-gradient(140deg, #202c59, #7182b5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.phone {
+    height: 255px;
+    width: 135px;
+    border: 9px solid #22283a;
+    border-radius: 22px;
+    background: linear-gradient(145deg, #111c43, #687db9);
+    box-shadow: 0 12px 25px rgba(0,0,0,.45);
+    position: relative;
+}
+
+.phone:before {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 6px;
+    background: #080c19;
+    border-radius: 10px;
+    top: 3px;
+    left: 38px;
+}
+
+.phone:after {
+    content: "X16";
+    position: absolute;
+    bottom: 35px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* ================= PRODUCT DETAILS ================= */
+
+.product-title-area {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.product-title-area h2 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.price-area {
+    position: relative;
+    margin: 20px 0;
+}
+
+.price {
+    font-size: 27px;
+    font-weight: bold;
+    color: #16804c;
+}
+
+.old-price {
+    color: #9299a7;
+    text-decoration: line-through;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.description-area {
+    position: relative;
+    margin: 20px 0;
+}
+
+.description {
+    color: #596174;
+    line-height: 1.8;
+}
+
+.features {
+    color: #596174;
+    line-height: 2;
+    padding-left: 20px;
+}
+
+.primary-button {
+    width: 100%;
+    background: #148052;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+/* ================= INFORMATION ================= */
+
+.info-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.info-box {
+    flex: 1;
+    background: #f1f4fa;
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 13px;
+}
+
+.review {
+    position: relative;
+    background: #f7f8fb;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.review p {
+    color: #697386;
+    font-size: 13px;
+}
+
+/* ================= DELIVERY ================= */
+
+.delivery-card {
+    min-height: 190px;
+}
+
+.delivery-item {
+    padding: 9px 0;
+    border-bottom: 1px solid #edf0f5;
+    color: #596174;
+}
+
+/* ================= CHECKOUT ================= */
+
+.checkout {
+    position: relative;
+    background: #f6f7fa;
+    border-radius: 9px;
+    padding: 18px;
+}
+
+.checkout-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+    font-size: 14px;
+}
+
+.checkout-total {
+    border-top: 1px solid #dce0e8;
+    padding-top: 15px;
+    font-weight: bold;
+    font-size: 19px;
+}
+
+/* ================= OVERLAP ELEMENTS ================= */
+
+/* All overlays are hidden in baseline mode */
+
+.overlap {
+    display: none;
+    position: absolute;
+    z-index: 50;
+    padding: 13px;
+    border-radius: 9px;
+    font-size: 13px;
+    line-height: 1.4;
+    box-shadow: 0 5px 18px rgba(0,0,0,.35);
+}
+
+/* All overlays appear in changed mode */
+
+body.changed .overlap {
+    display: block;
+}
+
+.overlap-label {
+    display: inline-block;
+    background: #9be66c;
+    color: #173b16;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 12px;
+    margin-bottom: 6px;
+}
+
+/* 01 - Opaque overlap over product image */
+
+.image-cover {
+    top: 80px;
+    left: 85px;
+    width: 225px;
+    height: 120px;
+    background: #26334f;
+    color: white;
+}
+
+/* 02 - Translucent overlap over price */
+
+.price-cover {
+    top: -12px;
+    left: 10px;
+    width: 270px;
+    height: 83px;
+    background: rgba(35, 72, 145, 0.82);
+    color: white;
+}
+
+/* 03 - Opaque overlap over product description */
+
+.description-cover {
+    top: 0;
+    left: 15px;
+    width: 88%;
+    height: 115px;
+    background: #18243b;
+    color: white;
+}
+
+/* 04 - Translucent overlap over Add to Cart button */
+
+.button-cover {
+    bottom: -3px;
+    left: 35px;
+    width: 82%;
+    height: 78px;
+    background: rgba(229, 155, 34, 0.90);
+    color: #392400;
+}
+
+/* 05 - Opaque overlap over delivery information */
+
+.delivery-cover {
+    top: 35px;
+    right: 15px;
+    width: 195px;
+    height: 105px;
+    background: #28354f;
+    color: white;
+}
+
+/* 06 - Translucent overlap over checkout summary */
+
+.coupon-cover {
+    top: 20px;
+    left: 25px;
+    width: 85%;
+    height: 100px;
+    background: rgba(35, 115, 85, 0.90);
+    color: white;
+}
+
+/* 07 - Opaque overlap over customer review */
+
+.review-cover {
+    top: 15px;
+    left: 25px;
+    width: 75%;
+    height: 75px;
+    background: #563875;
+    color: white;
+}
+
+/* 08 - Translucent overlap over checkout button */
+
+.support-cover {
+    bottom: 5px;
+    right: 10px;
+    width: 165px;
+    height: 80px;
+    background: rgba(39, 62, 139, 0.91);
+    color: white;
+}
+
+/* 09 - Opaque overlap over product title */
+
+.title-cover {
+    top: 0;
+    left: 75px;
+    width: 225px;
+    height: 65px;
+    background: #bd5148;
+    color: white;
+}
+
+/* 10 - Translucent overlap over navigation */
+
+.cart-cover {
+    top: 5px;
+    right: 100px;
+    width: 180px;
+    height: 65px;
+    background: rgba(239, 183, 48, 0.95);
+    color: #382600;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    background: #10172d;
+    color: #dce2f2;
+    text-align: center;
+    padding: 25px;
+    margin-top: 35px;
+    font-size: 13px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width: 800px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .container {
+        padding: 0 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+    <div class="logo">QSTORE</div>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Mobiles</a>
+        <a href="#">Laptops</a>
+        <a href="#">Accessories</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <div class="cart">My Cart (1)</div>
+
+    <!-- OVERLAP 10 -->
+    <div class="overlap cart-cover">
+        <span class="overlap-label">OVERLAP 10</span><br>
+        Floating notification covers the navigation area.
+    </div>
+</header>
+
+
+<!-- MAIN CONTENT -->
+
+<main class="container">
+
+    <div class="page-heading">
+        <h1>Smartphone X16</h1>
+        <p>Home / Mobiles / Smartphones / X16</p>
+    </div>
+
+    <div class="grid">
+
+        <!-- LEFT COLUMN -->
+
+        <section>
+
+            <!-- PRODUCT IMAGE -->
+
+            <div class="card">
+                <h3>Product Preview</h3>
+
+                <div class="product-image">
+                    <div class="phone"></div>
+
+                    <!-- OVERLAP 01 -->
+                    <div class="overlap image-cover">
+                        <span class="overlap-label">OVERLAP 01</span><br>
+                        Product notification panel covers a portion of the smartphone image.
+                    </div>
+                </div>
+
+                <p style="color:#7a8496;font-size:13px;">
+                    Product image gallery · 1 of 4
+                </p>
+            </div>
+
+
+            <!-- CUSTOMER REVIEWS -->
+
+            <div class="card">
+                <h3>Customer Reviews</h3>
+
+                <div class="review">
+                    <strong>★★★★★ Excellent product</strong>
+                    <p>Display quality is amazing and the camera performance is excellent.</p>
+
+                    <!-- OVERLAP 07 -->
+                    <div class="overlap review-cover">
+                        <span class="overlap-label">OVERLAP 07</span><br>
+                        This panel hides the customer review content.
+                    </div>
+                </div>
+
+                <div class="review">
+                    <strong>★★★★☆ Good performance</strong>
+                    <p>Battery backup is good for everyday use.</p>
+                </div>
+
+                <div class="review">
+                    <strong>★★★★★ Worth the price</strong>
+                    <p>Fast performance and attractive design.</p>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- RIGHT COLUMN -->
+
+        <section>
+
+            <!-- PRODUCT DETAILS -->
+
+            <div class="card">
+
+                <div class="product-title-area">
+                    <h2>Smartphone X16 – 256 GB</h2>
+
+                    <!-- OVERLAP 09 -->
+                    <div class="overlap title-cover">
+                        <span class="overlap-label">OVERLAP 09</span><br>
+                        Promotional banner covers the product title.
+                    </div>
+                </div>
+
+                <div class="price-area">
+                    <span class="price">₹49,999</span>
+                    <span class="old-price">₹59,999</span>
+
+                    <!-- OVERLAP 02 -->
+                    <div class="overlap price-cover">
+                        <span class="overlap-label">OVERLAP 02</span><br>
+                        Translucent promotional card partially hides the price.
+                    </div>
+                </div>
+
+                <div class="description-area">
+                    <p class="description">
+                        Experience powerful performance with the latest
+                        processor, stunning AMOLED display, advanced camera
+                        system and long-lasting battery.
+                    </p>
+
+                    <!-- OVERLAP 03 -->
+                    <div class="overlap description-cover">
+                        <span class="overlap-label">OVERLAP 03</span><br>
+                        Opaque panel completely hides part of the product description.
+                    </div>
+                </div>
+
+                <h3>Key Features</h3>
+
+                <ul class="features">
+                    <li>6.7-inch AMOLED display</li>
+                    <li>256 GB internal storage</li>
+                    <li>50 MP advanced camera</li>
+                    <li>5000 mAh battery</li>
+                    <li>Fast charging support</li>
+                </ul>
+
+                <button class="primary-button">Add to Cart</button>
+
+                <!-- OVERLAP 04 -->
+                <div class="overlap button-cover">
+                    <span class="overlap-label">OVERLAP 04</span><br>
+                    Translucent floating panel blocks the Add to Cart button.
+                </div>
+
+            </div>
+
+
+            <!-- DELIVERY DETAILS -->
+
+            <div class="card delivery-card">
+                <h3>Delivery Information</h3>
+
+                <div class="delivery-item">
+                    Expected Delivery: 2–4 Business Days
+                </div>
+
+                <div class="delivery-item">
+                    Shipping: Free Delivery
+                </div>
+
+                <div class="delivery-item">
+                    Return Policy: 10 Days
+                </div>
+
+                <div class="delivery-item">
+                    Payment: Cash on Delivery Available
+                </div>
+
+                <!-- OVERLAP 05 -->
+                <div class="overlap delivery-cover">
+                    <span class="overlap-label">OVERLAP 05</span><br>
+                    Opaque card hides delivery information.
+                </div>
+            </div>
+
+
+            <!-- CHECKOUT -->
+
+            <div class="card">
+                <h3>Order Summary</h3>
+
+                <div class="checkout">
+
+                    <div class="checkout-row">
+                        <span>Product Price</span>
+                        <strong>₹49,999</strong>
+                    </div>
+
+                    <div class="checkout-row">
+                        <span>Shipping</span>
+                        <strong>Free</strong>
+                    </div>
+
+                    <div class="checkout-row">
+                        <span>Discount</span>
+                        <strong>₹2,000</strong>
+                    </div>
+
+                    <div class="checkout-row checkout-total">
+                        <span>Total Amount</span>
+                        <strong>₹47,999</strong>
+                    </div>
+
+                    <button class="primary-button">
+                        Proceed to Checkout
+                    </button>
+
+                    <!-- OVERLAP 06 -->
+                    <div class="overlap coupon-cover">
+                        <span class="overlap-label">OVERLAP 06</span><br>
+                        Coupon panel partially hides order summary information.
+                    </div>
+
+                    <!-- OVERLAP 08 -->
+                    <div class="overlap support-cover">
+                        <span class="overlap-label">OVERLAP 08</span><br>
+                        Support panel covers the checkout button.
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<footer>
+    QSTORE · Sample Application for Qyrus Visual Testing
+</footer>
+
+
+<!-- URL-BASED VISUAL MODE -->
+
+<script>
+(function () {
+
+    const params = new URLSearchParams(window.location.search);
+    const visualMode = params.get("vt");
+
+    // Baseline URL: ?vt=baseline
+    // Changed URL:   ?vt=changed
+
+    if (visualMode === "changed") {
+        document.body.classList.add("changed");
+    } else {
+        document.body.classList.remove("changed");
+    }
+
+})();
+</script>
+
+</body>
+</html>
